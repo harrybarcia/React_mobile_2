@@ -7,5 +7,15 @@ export const globalStyles = StyleSheet.create({
         fontSize: 32,
         color: "#f44",
       },
+      header: {
+        backgroundColor: "#093357",
+        width: "100%",
+      },
+      text: {
+        fontWeight: "bold",
+        padding: 12,
+        fontSize: 16,
+        color: "#bbb",
+      },
 
 })

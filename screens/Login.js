@@ -9,11 +9,19 @@ import { Formik } from "formik";
 import * as yup from "yup";
 // Par choix, je décide de déclarer le authSchema a l'extérieure dans l'éventualité de l'exporter
 // on créé deux objets avec leur propriétés
-const authSchema= yup.object({
-  email: yup.string().email("email incorrect").required("email ne peut pas être vide"),
-  password: yup.string().required("password ne peut pas être vide").min(6, "le mot de passe doit contenir au moins 6 caratères ").test("isCorrectPassword", "Mot de passe incorrect", (valeur)=>{return true})
+const authSchema = yup.object({
+  email: yup
+    .string()
+    .email("email incorrect")
+    .required("email ne peut pas être vide"),
+  password: yup
+    .string()
+    .required("password ne peut pas être vide")
+    .min(6, "le mot de passe doit contenir au moins 6 caratères ")
+    .test("isCorrectPassword", "Mot de passe incorrect", (valeur) => {
+      return true;
+    }),
   // 1 nom du test, 2 le mesg,  3 la fonction
- 
 });
 
 export default function Login(props) {
@@ -28,10 +36,11 @@ export default function Login(props) {
   };
   return (
     <View style={{ alignItems: "center" }}>
-      <View style={styles.header}>
+      <View style={globalStyles.header}>
         <Text style={globalStyles.titre}>Bienvenue!</Text>
-        <Text style={styles.text}>Commencez par vous connecter.</Text>
+        <Text style={globalStyles.text}>Commencez par vous connecter.</Text>
       </View>
+      {/* Formik a besoin de: Valeurs initiales (initalValues) Validation yup (validationSchema) Fonction exécutée (onSubmit)*/}
 
       <Formik
         initialValues={{ email: "", password: "" }}
@@ -39,7 +48,7 @@ export default function Login(props) {
         //onSubmit est un parametre qui accepte une fonction à executer
         onSubmit={(values) => {
           console.log("mail: " + values.email + " pass: " + values.password);
-          handleSubmit(values.email, values.password )
+          handleSubmit(values.email, values.password);
         }}
       >
         {/* Cette fonction va afficher nos inputs a l'écran, et grâce au formikProps (terme personnel) on pourra accéder à d'autres paramètres comme les valeurs d'e-mail ou password */}
@@ -48,32 +57,37 @@ export default function Login(props) {
             {/* Le paramètre  valeur permet a formik d'écouter les changements de notre input
             Formik nous offre la fonction handleChange pour modifier les valeurs. Nous n'avons pas besoin de useState */}
             <Input
-              name='Email'
+              name="email"
               onChange={formikProps.handleChange("email")}
               valeur={formikProps.values.email}
+              onBlur={formikProps.handleBlur("email")}
             />
-            <Text>
-              {formikProps.errors.email}
-            </Text>
+            <Text>{formikProps.touched.email && formikProps.errors.email}</Text>
             <Input
-              name='Mot de passe'
+              name="Mot de passe"
               onChange={formikProps.handleChange("password")}
               isPassword
-              valeur={formikProps.values.password}
-              />
-              <Text>
-                {formikProps.errors.password}
-              </Text>
+              valeur={
+                formikProps.touched.password && formikProps.values.password
+              }
+              /*               La propriété onBlur est une fonction qui s'exécute quand on quitte un input
+               */
+              onBlur={formikProps.handleBlur("password")}
+            />
+            <Text>
+              {/*               La propriété touched est un boolean qui permet de savoir si un input a été touché ou pas.
+               */}
+              {formikProps.errors.password && formikProps.touched.password}
+            </Text>
             {/* On utilise le mot-clé fourni par Formik 'handleSubmit', pour exécuter la fonction onSubmit préciser plus haut */}
-            <Button
-              name='Login'
-              onClick={formikProps.handleSubmit}
-            ></Button>
+            <Button name="Login" onClick={formikProps.handleSubmit}></Button>
           </>
         )}
       </Formik>
+      {/* Ce button est pour naviguer vers Signin */}
+
       <Button
-        name='Signin'
+        name="Signin"
         // Il faut passer une référence à la fonction en utilisant la syntaxe en flèche.
         onClick={() =>
           props.navigation.navigate("Signin", { email: "emaifgl" })
@@ -82,7 +96,7 @@ export default function Login(props) {
     </View>
   );
 }
-const styles = StyleSheet.create({
+/* const styles = StyleSheet.create({
   header: {
     backgroundColor: "#093357",
     width: "100%",
@@ -93,4 +107,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#bbb",
   },
-});
+}); */

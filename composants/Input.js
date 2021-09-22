@@ -9,6 +9,7 @@ const Input = (props) => {
         placeholder={props.name}
         placeholderTextColor="#bbb"
         value={props.valeur}
+        onBlur={props.onBlur}
       ></TextInput>
     )
 }
