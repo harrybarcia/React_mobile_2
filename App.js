@@ -13,6 +13,7 @@ import Input from "./composants/Input";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
 import { UserContext } from "./contexts/UserContext";
+import AuthStack from "./routes/AuthStack";
 
 
 export default function App() {
@@ -34,7 +35,8 @@ export default function App() {
       {user.isAuth ? (
         <Home ></Home> // mon composant home a une fonction qui se déconnecte.
       ) : (
-        <Login ></Login>
+        // <Login ></Login>
+        <AuthStack></AuthStack>
       )}
       <StatusBar hidden={false} style='auto' />
 
@@ -46,8 +48,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+
+
     fontWeight: "bold",
   },
 });

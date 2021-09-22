@@ -8,6 +8,7 @@ const Input = (props) => {
         style={styles.input}
         placeholder={props.name}
         placeholderTextColor="#bbb"
+        value={props.valeur}
       ></TextInput>
     )
 }
