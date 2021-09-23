@@ -34,7 +34,7 @@ export default function App() {
     }
 
   // On declare une constante utilisateur
-  const [user, setUser] = useState({ email: "", isAuth: false });
+  const [user, setUser] = useState({ email: "", isAuth: true });
   return (
     <View style={styles.container}>
         <UserContext.Provider value={{user, setUser}}>

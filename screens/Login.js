@@ -7,6 +7,9 @@ import { globalStyles } from "../styles/GlobalStyles";
 import { UserContext } from "../contexts/UserContext";
 import { Formik } from "formik";
 import * as yup from "yup";
+import { logIn, getInformations } from "../firebase/firebaseApi";
+
+import { registration } from "../firebase/firebaseApi";
 // Par choix, je décide de déclarer le authSchema a l'extérieure dans l'éventualité de l'exporter
 // on créé deux objets avec leur propriétés
 const authSchema = yup.object({
@@ -27,10 +30,16 @@ export default function Login(props) {
   // const [theEmail, setEmail] = useState("");
   // const [password, setPassword] = useState("");
   const context = useContext(UserContext);
-  // Fonction qui permet de mettre a jour l'utilisateur
-  const handleSubmit = (email, password) => {
+  // Fonction qui permet de mettre a jour l'utilisateur si kigin réussis l'authentification
+  const handleSubmit = async (email, password) => {
     /* j'utilise plus les deux constantes, donc je dois remplir ici avec les valeur passées dans handlesubmit de formik */
-    context.setUser({ email: email, isAuth: true });
+    if (await logIn(email, password)){
+      const currentUser = firebase.auth().currentUser;
+      console.log(currentUser);
+      console.log(await getInformations(currentUser.uid));
+      
+      context.setUser({ email: email, isAuth: true });
+    }
   };
   return (
     <View style={{ alignItems: "center" }}>

@@ -3,7 +3,7 @@
 // import firebaseConfig from "./firebaseConfig";
 import firebase from "firebase/app"
 import "firebase/auth"
-
+import React from "react";
 import "firebase/firestore";
 import { Alert } from "react-native";
 // on utilise une fonction asynchrone
@@ -21,10 +21,28 @@ export async function registration (email, password, lastname, firstname){
         email: currentUser.email,
         lastname: lastname,
         firstname: firstname,
-        });
+        
+        });console.log(currentUser);
     } catch(error){
         Alert.alert("un probleme est survenu", error.message);
     }
 }
+
+export async function logIn (email, password){
+    try{
+        await firebase.auth().signInWithEmailAndPassword(email, password);
+    }
+    catch(error){
+        Alert.alert("un pb est survenu", error.message);
+        return false;
+    }
+    return true;
+}
+// la fonction va récupérer le doc associé au uid fournit en paramètre
+    export async function getInformations (uid){
+    const db = firebase.firestore();
+    return db.collection('users').doc(uid)
+
+    }
 //Alert c'est du react native (titre et message de l'erreur)
 // on envoie une fcont asy une fois qu'elle et fini  (then) on continue le code.
