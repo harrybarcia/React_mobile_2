@@ -14,7 +14,7 @@ export default function Home(){
     return (
         // mon composant home a une vue avec son style, son button qui a un nom (logout) et une fonction qui se déclenche au clicK.
     <View>
-        <Text style={globalStyles.titre}>Hosme</Text>
+        <Text style={globalStyles.titre}>Home</Text>
         <Button name='Logout' onClick={handleLogout}></Button>      
     </View>
     );

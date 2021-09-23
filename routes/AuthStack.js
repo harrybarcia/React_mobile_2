@@ -4,14 +4,16 @@ import Signin from "../screens/Signin";
 import {createAppContainer} from "react-navigation"
 import {createStackNavigator} from "react-navigation-stack"
 const screens ={
+    //route
     Login:{
-        screen: Login,
+        screen: Login, // composants
         navigationOptions:{
             title:'Connection',
         },
     },
+    //route
     Signin:{
-        screen: Signin,
+        screen: Signin,// composants
         navigationOptions:{
             title:'Inscription',
         },

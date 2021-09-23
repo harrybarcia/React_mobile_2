@@ -18,9 +18,7 @@ const authSchema = yup.object({
     .string()
     .required("password ne peut pas être vide")
     .min(6, "le mot de passe doit contenir au moins 6 caratères ")
-    .test("isCorrectPassword", "Mot de passe incorrect", (valeur) => {
-      return true;
-    }),
+
   // 1 nom du test, 2 le mesg,  3 la fonction
 });
 
@@ -42,7 +40,7 @@ export default function Login(props) {
       </View>
       {/* Formik a besoin de: Valeurs initiales (initalValues) Validation yup (validationSchema) Fonction exécutée (onSubmit)*/}
 
-      <Formik
+      <Formik //prend 3 étapes
         initialValues={{ email: "", password: "" }}
         validationSchema={authSchema}
         //onSubmit est un parametre qui accepte une fonction à executer
@@ -58,7 +56,7 @@ export default function Login(props) {
             Formik nous offre la fonction handleChange pour modifier les valeurs. Nous n'avons pas besoin de useState */}
             <Input
               name="email"
-              onChange={formikProps.handleChange("email")}
+              onChange={formikProps.handleChange("email")} // on change les données de l'input avec le mot cle email
               valeur={formikProps.values.email}
               onBlur={formikProps.handleBlur("email")}
             />
