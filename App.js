@@ -17,9 +17,9 @@ import AuthStack from "./routes/AuthStack";
 // import firebaseConfig from "./firebase/firebaseConfig";
 // import * as firebase from "firebase";
 import firebase from "firebase/app";
-import "firebase/auth";
+// import "firebase/auth";
 export default function App() {
-    if(!firebase.apps.length){
+/*     if(!firebase.apps.length){
       firebase.initializeApp({
         apiKey: "AIzaSyCS4WOaIC0nNX_-BedSbfPlIwtv-r_nBkY",
         authDomain: "monapp-984f2.firebaseapp.com",
@@ -31,7 +31,7 @@ export default function App() {
       console.log("firebase connected!")
 
 
-    }
+    } */
 
   // On declare une constante utilisateur
   const [user, setUser] = useState({ email: "", isAuth: true });
