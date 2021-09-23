@@ -10,7 +10,7 @@ export default function Home() {
   const context = useContext(UserContext);
   const [isCamera, setIsCamera] = useState(false);
   const handleLogout = () => {
-    context.setUser({ email: "", isAuth: false }); // fonction qui déconnecte
+    context.setUser({ email: "", isAuth: true }); // fonction qui déconnecte
   };
   return (
     // mon composant home a une vue avec son style, son button qui a un nom (logout) et une fonction qui se déclenche au clicK.
@@ -18,6 +18,7 @@ export default function Home() {
       {/* Modal est une composant qui s'affiche selon une condiotion donnée en propriété nommé visible */}
       <Modal visible={isCamera}>
         <Cam></Cam>
+      <Button style= {{margin:10}} name="fermer Camera" onClick={()=>{setIsCamera(false)}}></Button>
       </Modal>
       <Text style={globalStyles.titre}>Home</Text>
       <Button name="Ouvrir Camera" onClick={()=>{setIsCamera(true)}}></Button>
